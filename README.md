@@ -1,7 +1,7 @@
 # TODO-CLI
 
-This application was made to improve the productivity. This app is really simple to use and fits with people who loves
-to work with terminal.
+This application was made to improve productivity. This app is really simple to use and fits people who love to work 
+with the terminal.
 
 ## Installation
 
@@ -11,6 +11,6 @@ TODO
 
 - Add a todo task
 - See tasks that should be done in a day
-- Mark as done a certain task
+- Mark the task as done
 - Update detail of a certain task
 - Unfinished tasks in a day would be automatically brought to the next day
