@@ -1,35 +1,29 @@
 from __future__ import print_function, unicode_literals
-
-import time
-
 from PyInquirer import prompt
 
 from questions.main_menu import *
 from questions.add_task import *
+from questions.see_tasks import *
+
+from handler.see_tasks_handler import *
+from handler.add_task_handler import *
 
 from examples import custom_style_3
 from utils.interface import *
-
 import pyfiglet
 from printy import printy
 
 
 def see_tasks():
-    clear_screen()
-    print("Dummy")
+    print_app_header()
+    ans = prompt(see_tasks_questions, style=custom_style_3)
+    handle_see_tasks(ans)
 
 
 def add_task():
-    clear_screen()
     print_app_header()
-
     ans = prompt(add_task_questions, style=custom_style_3)
-    task_name = ans['task_name']
-    task_description = ans['task_description']
-    task_tags = ans['task_tags']
-    task_date = ans['task_date']
-
-    print(task_name, task_description, task_tags, task_date)
+    handle_add_task(ans)
 
 
 def handle_command(comm):
@@ -43,11 +37,11 @@ def handle_command(comm):
 
 def print_app_header():
     app_header_text = pyfiglet.figlet_format('TODO-cli')
+    clear_screen()
     printy(app_header_text, 'bB')
 
 
 if __name__ == "__main__":
-    clear_screen()
     while 1:
         print_app_header()
 
@@ -56,4 +50,3 @@ if __name__ == "__main__":
         handle_command(command)
 
         time.sleep(1)
-        clear_screen()
