@@ -17,14 +17,18 @@ import pyfiglet
 from printy import printy
 
 
-def see_tasks():
+def see_tasks(db_conn):
     print_app_header()
+
+    show_top_five_tasks(db_conn)
+    
     ans = prompt(see_tasks_questions, style=custom_style_3)
     handle_see_tasks(ans)
 
 
 def add_task(db_conn):
     print_app_header()
+    
     ans = prompt(add_task_questions, style=custom_style_3)
     handle_add_task(db_conn, ans)
 
@@ -33,7 +37,7 @@ def handle_command(comm, db_conn):
     if comm == "exit":
         exit()
     elif comm == "see tasks":
-        see_tasks()
+        see_tasks(db_conn)
     elif comm == "add task":
         add_task(db_conn)
 

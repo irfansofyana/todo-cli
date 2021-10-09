@@ -44,6 +44,14 @@ def get_all_tasks(conn):
         tasks.append(task)
     return tasks
 
+def get_top_five_tasks(conn):
+    query = """
+        SELECT id, name, description, start_date
+        FROM tasks
+        LIMIT 5
+    """
+    rows = conn.execute(query)
+    return rows
 
 def insert_task(conn, task):
     query = """

@@ -4,6 +4,14 @@ from PyInquirer import prompt
 from questions.see_tasks import *
 from examples import custom_style_3
 
+from database.tasks import *
+
+def show_top_five_tasks(db_conn):
+    tasks = get_top_five_tasks(db_conn)
+    print("Top 5 Tasks:")
+    for t in tasks:
+        print(t)
+        print("==============")
 
 def handle_see_tasks(answer):
     command = answer["main"].lower()
