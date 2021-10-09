@@ -1,5 +1,15 @@
 class Task:
-    def __init__(self, name, description, start_date, importance, urgency, tags, id=None, status="IN PROGRESS"):
+    def __init__(
+        self,
+        name,
+        description,
+        start_date,
+        importance,
+        urgency,
+        tags,
+        id=None,
+        status="IN PROGRESS",
+    ):
         self.id = id
         self.name = name
         self.description = description
@@ -20,6 +30,7 @@ class Task:
             self.tags,
         )
 
+
 def convert_row_tuple_to_task(row_tuple):
     t = Task(
         row_tuple[1],
@@ -33,6 +44,7 @@ def convert_row_tuple_to_task(row_tuple):
     )
     return t
 
+
 def get_all_tasks(conn):
     query = """
         SELECT *
@@ -43,6 +55,7 @@ def get_all_tasks(conn):
         task = convert_row_tuple_to_task(row)
         tasks.append(task)
     return tasks
+
 
 def get_top_five_tasks(conn):
     query = """
@@ -56,6 +69,7 @@ def get_top_five_tasks(conn):
     cursor = conn.cursor()
     cursor.execute(query)
     return cursor
+
 
 def insert_task(conn, task):
     query = """

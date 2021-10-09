@@ -21,9 +21,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 def see_tasks(db_conn):
     show_top_five_tasks(db_conn)
-    
+
     ans = prompt(see_tasks_questions, style=custom_style_3)
     handle_see_tasks(ans)
 
@@ -51,20 +52,22 @@ def print_app_header():
 
 
 def init_db():
-    db_path = os.getenv('DATABASE_PATH')
+    db_path = os.getenv("DATABASE_PATH")
     db_conn, err = get_connection(db_path)
-    
+
     if err is not None:
         print("Can't connect to database: ", err)
         return None
-    
+
     init_db_tables(db_conn)
 
     return db_conn
 
+
 def init_db_tables(db_conn):
     db_conn.execute(CREATE_TASKS_TABLE)
     db_conn.commit()
+
 
 if __name__ == "__main__":
     db_conn = init_db()

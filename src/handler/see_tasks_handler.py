@@ -10,6 +10,7 @@ from questions.see_tasks import *
 from database.tasks import *
 from utils.interface import *
 
+
 def show_top_five_tasks(db_conn):
     text = pyfiglet.figlet_format("Top 5 Tasks!")
     clear_screen()
@@ -17,13 +18,14 @@ def show_top_five_tasks(db_conn):
 
     tasks_cursor = get_top_five_tasks(db_conn)
     tasks_table = from_db_cursor(tasks_cursor)
-    
+
     if len(list(tasks_table)) > 0:
         printy(tasks_table, "B")
-        printy('Keep up the high spirit, you can do it!', 'oB')
+        printy("Keep up the high spirit, you can do it!", "oB")
     else:
-        printy('There is no tasks left for today :) Keep up the goodwork!', 'nB')
-    print('')
+        printy("There is no tasks left for today :) Keep up the goodwork!", "nB")
+    print("")
+
 
 def handle_see_tasks(answer):
     command = answer["main"].lower()
