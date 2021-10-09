@@ -39,7 +39,7 @@ def add_task(db_conn):
 
 def handle_command(comm, db_conn):
     if comm == "exit":
-        exit()
+        sys.exit()
     elif comm == "see tasks":
         see_tasks(db_conn)
     elif comm == "add task":
