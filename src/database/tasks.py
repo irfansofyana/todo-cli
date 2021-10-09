@@ -1,6 +1,3 @@
-from connection import get_connection
-
-
 class Task:
     def __init__(self, name, description, start_date, importance, urgency, tags, id=None, status="IN PROGRESS"):
         self.id = id
@@ -63,23 +60,3 @@ def insert_task(conn, task):
     """
     conn.execute(query, task.form_insert_query_tuple())
     conn.commit()
-
-
-if __name__ == "__main__":
-    c, err = get_connection('../../db/tasks-dummy.db')
-    if err is not None:
-        print(err)
-    else:
-        t = Task (
-            'dummy 3',
-            'description',
-            '2021-10-09',
-            4,
-            10,
-            ['work', 'learning']
-        )
-        insert_task(c, t)
-
-        tasks = get_all_tasks(c)
-        for t in tasks:
-            print(t.id, t.name, t.start_date)

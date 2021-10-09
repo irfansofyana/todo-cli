@@ -8,6 +8,9 @@ from questions.see_tasks import *
 from handler.see_tasks_handler import *
 from handler.add_task_handler import *
 
+from database.connection import get_connection
+from database.queries import *
+
 from examples import custom_style_3
 from utils.interface import *
 import pyfiglet
@@ -20,19 +23,19 @@ def see_tasks():
     handle_see_tasks(ans)
 
 
-def add_task():
+def add_task(db_conn):
     print_app_header()
     ans = prompt(add_task_questions, style=custom_style_3)
-    handle_add_task(ans)
+    handle_add_task(db_conn, ans)
 
 
-def handle_command(comm):
+def handle_command(comm, db_conn):
     if comm == "exit":
         exit()
     elif comm == "see tasks":
         see_tasks()
     elif comm == "add task":
-        add_task()
+        add_task(db_conn)
 
 
 def print_app_header():
@@ -41,12 +44,32 @@ def print_app_header():
     printy(app_header_text, "bB")
 
 
+def init_db():
+    db_path = '../db/tasks-dummy.db'
+    db_conn, err = get_connection(db_path)
+    
+    if err is not None:
+        print("Can't conect to database: ", err)
+        return None
+    
+    init_db_tables(db_conn)
+
+    return db_conn
+
+def init_db_tables(db_conn):
+    db_conn.execute(CREATE_TASKS_TABLE)
+    db_conn.commit()
+
 if __name__ == "__main__":
+    db_conn = init_db()
+    if db_conn is None:
+        exit()
+
     while 1:
         print_app_header()
 
         answer = prompt(main_menu_questions, style=custom_style_3)
         command = answer["main"].lower()
-        handle_command(command)
+        handle_command(command, db_conn)
 
         time.sleep(1)

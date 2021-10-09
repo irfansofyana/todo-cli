@@ -1,10 +1,16 @@
-def handle_add_task(ans):
-    task_name = ans["task_name"]
-    task_description = ans["task_description"]
-    task_tags = ans["task_tags"]
-    task_date = ans["task_date"]
-    task_importance = ans["task_importance"]
-    task_urgency = ans["task_urgency"]
+from database.tasks import *
 
-    print(task_name, task_description, task_tags, task_date)
-    print(input("Please press enter to back\n"))
+def handle_add_task(db_conn, ans):
+    try:
+        task = Task(
+            ans["task_name"],
+            ans["task_description"],
+            ans["task_date"],
+            ans["task_importance"],
+            ans["task_urgency"],
+            ans["task_tags"]
+        )
+        insert_task(db_conn, task)
+        print("Successfully add task to DB!")
+    except Exception as err:
+        print("Failed to add task to DB: ", err)
