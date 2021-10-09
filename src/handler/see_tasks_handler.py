@@ -1,17 +1,23 @@
 import time
+import pyfiglet
 
 from PyInquirer import prompt
-from questions.see_tasks import *
+from prettytable import from_db_cursor
+from printy import printy
 from examples import custom_style_3
 
+from questions.see_tasks import *
 from database.tasks import *
+from utils.interface import *
 
 def show_top_five_tasks(db_conn):
+    text = pyfiglet.figlet_format("Top 5 Tasks!")
+    clear_screen()
+    printy(text, "Br")
+
     tasks = get_top_five_tasks(db_conn)
-    print("Top 5 Tasks:")
-    for t in tasks:
-        print(t)
-        print("==============")
+    x = from_db_cursor(tasks)
+    printy(x, "B")
 
 def handle_see_tasks(answer):
     command = answer["main"].lower()

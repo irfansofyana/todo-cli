@@ -18,8 +18,6 @@ from printy import printy
 
 
 def see_tasks(db_conn):
-    print_app_header()
-
     show_top_five_tasks(db_conn)
     
     ans = prompt(see_tasks_questions, style=custom_style_3)
@@ -28,7 +26,7 @@ def see_tasks(db_conn):
 
 def add_task(db_conn):
     print_app_header()
-    
+
     ans = prompt(add_task_questions, style=custom_style_3)
     handle_add_task(db_conn, ans)
 
