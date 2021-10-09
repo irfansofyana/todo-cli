@@ -17,6 +17,7 @@ from printy import printy
 
 import pyfiglet
 import os
+import sys
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -72,7 +73,7 @@ def init_db_tables(db_conn):
 if __name__ == "__main__":
     db_conn = init_db()
     if db_conn is None:
-        exit()
+        sys.exit()
 
     while 1:
         print_app_header()
