@@ -52,7 +52,7 @@ def init_db():
     db_conn, err = get_connection(db_path)
     
     if err is not None:
-        print("Can't conect to database: ", err)
+        print("Can't connect to database: ", err)
         return None
     
     init_db_tables(db_conn)
@@ -75,4 +75,4 @@ if __name__ == "__main__":
         command = answer["main"].lower()
         handle_command(command, db_conn)
 
-        time.sleep(1)
+        time.sleep(0.1)
