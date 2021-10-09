@@ -1,4 +1,7 @@
 from database.tasks import *
+from printy import printy
+
+import time
 
 def handle_add_task(db_conn, ans):
     try:
@@ -11,6 +14,8 @@ def handle_add_task(db_conn, ans):
             ans["task_tags"]
         )
         insert_task(db_conn, task)
-        print("Successfully add task to DB!")
+        printy('Task added. Go for it!', 'n>B')
+        time.sleep(0.5)
     except Exception as err:
-        print("Failed to add task to DB: ", err)
+        printy(f'Failed to add tasks to DB: {err}', 'Br')
+        time.sleep(0.5)

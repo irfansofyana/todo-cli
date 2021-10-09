@@ -1,5 +1,5 @@
-import time
 import pyfiglet
+import time
 
 from PyInquirer import prompt
 from prettytable import from_db_cursor
@@ -15,9 +15,15 @@ def show_top_five_tasks(db_conn):
     clear_screen()
     printy(text, "Br")
 
-    tasks = get_top_five_tasks(db_conn)
-    tasks_table = from_db_cursor(tasks)
-    printy(tasks_table, "B")
+    tasks_cursor = get_top_five_tasks(db_conn)
+    tasks_table = from_db_cursor(tasks_cursor)
+    
+    if len(list(tasks_table)) > 0:
+        printy(tasks_table, "B")
+        printy('Keep up the high spirit, you can do it!', 'oB')
+    else:
+        printy('There is no tasks left for today :) Keep up the goodwork!', 'nB')
+    print('')
 
 def handle_see_tasks(answer):
     command = answer["main"].lower()

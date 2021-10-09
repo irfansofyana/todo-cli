@@ -13,8 +13,9 @@ from database.queries import *
 
 from examples import custom_style_3
 from utils.interface import *
-import pyfiglet
 from printy import printy
+
+import pyfiglet
 
 
 def see_tasks(db_conn):

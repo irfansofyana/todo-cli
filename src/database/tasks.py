@@ -48,10 +48,14 @@ def get_top_five_tasks(conn):
     query = """
         SELECT id, name, description, start_date
         FROM tasks
+        WHERE status != 'DONE'
+        AND start_date <= DATE('now')
+        ORDER BY start_date ASC, urgency DESC, importance DESC
         LIMIT 5
     """
-    rows = conn.execute(query)
-    return rows
+    cursor = conn.cursor()
+    cursor.execute(query)
+    return cursor
 
 def insert_task(conn, task):
     query = """
