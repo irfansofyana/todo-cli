@@ -27,18 +27,18 @@ def add_task():
 
 
 def handle_command(comm):
-    if comm == 'exit':
+    if comm == "exit":
         exit()
-    elif comm == 'see tasks':
+    elif comm == "see tasks":
         see_tasks()
-    elif comm == 'add task':
+    elif comm == "add task":
         add_task()
 
 
 def print_app_header():
-    app_header_text = pyfiglet.figlet_format('TODO-cli')
+    app_header_text = pyfiglet.figlet_format("TODO-cli")
     clear_screen()
-    printy(app_header_text, 'bB')
+    printy(app_header_text, "bB")
 
 
 if __name__ == "__main__":
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         print_app_header()
 
         answer = prompt(main_menu_questions, style=custom_style_3)
-        command = answer['main'].lower()
+        command = answer["main"].lower()
         handle_command(command)
 
         time.sleep(1)
