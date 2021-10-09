@@ -16,7 +16,10 @@ from utils.interface import *
 from printy import printy
 
 import pyfiglet
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def see_tasks(db_conn):
     show_top_five_tasks(db_conn)
@@ -48,7 +51,7 @@ def print_app_header():
 
 
 def init_db():
-    db_path = '../db/tasks-dummy.db'
+    db_path = os.getenv('DATABASE_PATH')
     db_conn, err = get_connection(db_path)
     
     if err is not None:
