@@ -16,8 +16,8 @@ def show_top_five_tasks(db_conn):
     printy(text, "Br")
 
     tasks = get_top_five_tasks(db_conn)
-    x = from_db_cursor(tasks)
-    printy(x, "B")
+    tasks_table = from_db_cursor(tasks)
+    printy(tasks_table, "B")
 
 def handle_see_tasks(answer):
     command = answer["main"].lower()
