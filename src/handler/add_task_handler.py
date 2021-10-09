@@ -15,7 +15,7 @@ def handle_add_task(db_conn, ans):
         )
         insert_task(db_conn, task)
         printy('Task added. Go for it!', 'n>B')
-        time.sleep(0.5)
+        time.sleep(1)
     except Exception as err:
         printy(f'Failed to add tasks to DB: {err}', 'Br')
-        time.sleep(0.5)
+        time.sleep(1)
