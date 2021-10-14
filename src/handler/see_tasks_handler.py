@@ -62,7 +62,7 @@ def handle_update_task(answer):
 def handle_mark_done_a_task(answer, db_conn):
     task_id = answer["task_id"]
     rowcount = mark_done_task(db_conn, task_id)
-    if rowcount > 1:
+    if rowcount > 0:
         printy("Task updated successfully!", "nB")
     else:
         msg = f"Task with ID = {task_id} is already DONE or it's not exist"
