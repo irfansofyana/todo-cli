@@ -43,7 +43,7 @@ def handle_see_tasks(answer, db_conn):
 
 
 def handle_detail_task(answer, db_conn):
-    task_id = answer['task_id']
+    task_id = answer["task_id"]
     task_cursor = get_detail_task(db_conn, task_id)
     task_table = from_db_cursor(task_cursor)
     if len(list(task_table)) > 0:
@@ -60,7 +60,7 @@ def handle_update_task(answer):
 
 
 def handle_mark_done_a_task(answer, db_conn):
-    task_id = answer['task_id']
+    task_id = answer["task_id"]
     rowcount = mark_done_task(db_conn, task_id)
     if rowcount > 1:
         printy("Task updated successfully!", "nB")

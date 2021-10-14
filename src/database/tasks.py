@@ -56,6 +56,7 @@ def get_all_tasks(conn):
         tasks.append(task)
     return tasks
 
+
 def get_detail_task(conn, task_id):
     query = """
         SELECT *
@@ -65,6 +66,7 @@ def get_detail_task(conn, task_id):
     cursor = conn.cursor()
     cursor.execute(query, task_id)
     return cursor
+
 
 def mark_done_task(conn, task_id):
     query = """
@@ -76,6 +78,7 @@ def mark_done_task(conn, task_id):
     cursor.execute(query, task_id)
     conn.commit()
     return cursor.rowcount
+
 
 def get_top_five_tasks(conn):
     query = """
