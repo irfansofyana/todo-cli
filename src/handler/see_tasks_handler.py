@@ -27,11 +27,11 @@ def show_top_five_tasks(db_conn):
     print("")
 
 
-def handle_see_tasks(answer):
+def handle_see_tasks(answer, db_conn):
     command = answer["main"].lower()
     if command == "see detail a task":
         ans = prompt(see_detail_a_task_questions, style=custom_style_3)
-        handle_detail_task(ans)
+        handle_detail_task(ans, db_conn)
     elif command == "update a task":
         ans = prompt(update_a_task_questions, style=custom_style_3)
         handle_update_task(ans)
@@ -42,9 +42,16 @@ def handle_see_tasks(answer):
         time.sleep(0)
 
 
-def handle_detail_task(answer):
-    print(answer)
-    print(input("Please press enter to back\n"))
+def handle_detail_task(answer, db_conn):
+    task_id = answer['task_id']
+    task_cursor = get_detail_task(db_conn, task_id)
+    task_table = from_db_cursor(task_cursor)
+    if len(list(task_table)) > 0:
+        printy(task_table, "B")
+    else:
+        msg = f"Sorry coudln't find the task with ID = {task_id}"
+        printy(msg, "Br")
+    print(input("\nPlease press enter to back\n"))
 
 
 def handle_update_task(answer):

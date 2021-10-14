@@ -56,6 +56,15 @@ def get_all_tasks(conn):
         tasks.append(task)
     return tasks
 
+def get_detail_task(conn, task_id):
+    query = """
+        SELECT *
+        FROM tasks
+        WHERE id = ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, task_id)
+    return cursor
 
 def get_top_five_tasks(conn):
     query = """

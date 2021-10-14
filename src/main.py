@@ -27,7 +27,7 @@ def see_tasks(db_conn):
     show_top_five_tasks(db_conn)
 
     ans = prompt(see_tasks_questions, style=custom_style_3)
-    handle_see_tasks(ans)
+    handle_see_tasks(ans, db_conn)
 
 
 def add_task(db_conn):
