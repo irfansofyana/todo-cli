@@ -66,6 +66,17 @@ def get_detail_task(conn, task_id):
     cursor.execute(query, task_id)
     return cursor
 
+def mark_done_task(conn, task_id):
+    query = """
+        UPDATE tasks
+        SET status = 'DONE'
+        WHERE id = ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, task_id)
+    conn.commit()
+    return cursor.rowcount
+
 def get_top_five_tasks(conn):
     query = """
         SELECT id, name, description, start_date

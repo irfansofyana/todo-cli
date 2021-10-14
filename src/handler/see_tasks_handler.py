@@ -37,7 +37,7 @@ def handle_see_tasks(answer, db_conn):
         handle_update_task(ans)
     elif command == "mark done a task":
         ans = prompt(mark_done_a_task_questions, style=custom_style_3)
-        handle_mark_done_a_task(ans)
+        handle_mark_done_a_task(ans, db_conn)
     elif command == "back":
         time.sleep(0)
 
@@ -59,6 +59,12 @@ def handle_update_task(answer):
     print(input("Please press enter to back\n"))
 
 
-def handle_mark_done_a_task(answer):
-    print(answer)
-    print(input("Please press enter to back\n"))
+def handle_mark_done_a_task(answer, db_conn):
+    task_id = answer['task_id']
+    rowcount = mark_done_task(db_conn, task_id)
+    if rowcount > 1:
+        printy("Task updated successfully!", "nB")
+    else:
+        msg = f"Task with ID = {task_id} is already DONE or it's not exist"
+        printy(msg, "Br")
+    print(input("\nPlease press enter to back\n"))
