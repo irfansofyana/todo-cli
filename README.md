@@ -29,4 +29,4 @@ with the terminal.
 - Update detail of a certain task.
 
 ## DEMO
-TBA
+![](./assets/demo.gif)
