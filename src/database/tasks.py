@@ -8,7 +8,7 @@ class Task:
         urgency,
         tags,
         id=None,
-        status="IN PROGRESS",
+        status="TODO",
     ):
         self.id = id
         self.name = name
@@ -82,7 +82,7 @@ def mark_done_task(conn, task_id):
 
 def get_top_five_tasks(conn):
     query = """
-        SELECT id, name, description, start_date
+        SELECT id, name, description, start_date, status
         FROM tasks
         WHERE status != 'DONE'
         AND start_date <= DATE('now', 'localtime')
