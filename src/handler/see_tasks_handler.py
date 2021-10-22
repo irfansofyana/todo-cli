@@ -106,7 +106,6 @@ def handle_update_task(answer, db_conn):
 def handle_mark_done_a_task(answer, db_conn):
     try:
         task_id = answer["task_id"]
-        print(task_id)
         rowcount = mark_done_task(db_conn, task_id)
 
         if rowcount > 0:
