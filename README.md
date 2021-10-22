@@ -28,5 +28,5 @@ with the terminal.
 - Mark a task as done i.e. change the `status` of the task become `DONE`.
 - Update detail of a certain task.
 
-## DEMO
-![](./assets/demo.gif)
+## Demo Video
+![](./assets/demo-todo-cli.mp4)
