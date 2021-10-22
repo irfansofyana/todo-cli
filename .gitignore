@@ -4,3 +4,4 @@ db
 database.db
 build
 dist
+main.spec
