@@ -1,12 +1,12 @@
 class Task:
     def __init__(
         self,
-        name,
-        description,
-        start_date,
-        importance,
-        urgency,
-        tags,
+        name="",
+        description="",
+        start_date="",
+        tags=[],
+        importance=0,
+        urgency=0,
         id=None,
         status="TODO",
     ):
@@ -29,7 +29,15 @@ class Task:
             self.urgency,
             self.tags,
         )
-
+    
+    def form_update_query_tuple(self):
+        return (
+            self.name,
+            self.description,
+            self.tags,
+            self.start_date,
+            self.id,
+        )
 
 def convert_row_tuple_to_task(row_tuple):
     t = Task(
@@ -108,4 +116,18 @@ def insert_task(conn, task):
         VALUES (?,?,?,?,?,?,?)
     """
     conn.execute(query, task.form_insert_query_tuple())
+    conn.commit()
+
+
+def update_task(conn, task):
+    query = """
+        UPDATE tasks
+        SET
+            name = ?,
+            description = ?,
+            tags = ?,
+            start_date = ?
+        WHERE id = ?
+    """
+    conn.execute(query, task.form_update_query_tuple())
     conn.commit()
