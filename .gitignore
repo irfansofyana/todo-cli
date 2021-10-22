@@ -4,4 +4,4 @@ db
 database.db
 build
 dist
-main.spec
+todo-cli.spec
