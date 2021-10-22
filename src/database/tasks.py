@@ -29,7 +29,7 @@ class Task:
             self.urgency,
             self.tags,
         )
-    
+
     def form_update_query_tuple(self):
         return (
             self.name,
@@ -38,6 +38,7 @@ class Task:
             self.start_date,
             self.id,
         )
+
 
 def convert_row_tuple_to_task(row_tuple):
     t = Task(
