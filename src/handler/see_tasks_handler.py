@@ -25,7 +25,7 @@ def show_top_five_tasks(db_conn):
             printy("Keep up the high spirit, you can do it!", "oB")
         else:
             printy("There is no tasks left for today :) Keep up the goodwork!", "nB")
-    except:
+    except Exception as err:
         printy(f"Failed to show top 5 task: {err}", "Br")
     finally:
         print("")
@@ -36,6 +36,9 @@ def handle_see_tasks(answer, db_conn):
     if command == "see detail a task":
         ans = prompt(see_detail_a_task_questions, style=custom_style_3)
         handle_detail_task(ans, db_conn)
+    elif command == "do a task":
+        ans = prompt(do_a_task_questions, style=custom_style_3)
+        handle_do_a_task(ans, db_conn)
     elif command == "update a task":
         ans = prompt(update_a_task_questions, style=custom_style_3)
         handle_update_task(ans, db_conn)
@@ -54,10 +57,26 @@ def handle_detail_task(answer, db_conn):
         if len(list(task_table)) > 0:
             printy(task_table, "B")
         else:
-            msg = f"Sorry coudln't find the task with ID = {task_id}"
+            msg = f"Sorry, task with ID = {task_id} is not found"
             printy(msg, "Br")
-    except:
+    except Exception as err:
         printy(f"Failed to show detail task: {err}", "Br")
+    finally:
+        print(input("\nPlease press enter to back\n"))
+
+
+def handle_do_a_task(answer, db_conn):
+    try:
+        task_id = answer["task_id"]
+        rowcount = do_a_task(db_conn, task_id)
+
+        if rowcount > 0:
+            printy("Now, task is In Progress. Go make it done!", "nB")
+        else:
+            msg = f"Sorry, task with ID = {task_id} is not found"
+            printy(msg, "Br")
+    except Exception as err:
+        printy(f"Failed to update the status of the task: {err}", "Br")
     finally:
         print(input("\nPlease press enter to back\n"))
 
@@ -71,8 +90,13 @@ def handle_update_task(answer, db_conn):
             tags=answer["task_tags"],
             id=answer["task_id"],
         )
-        update_task(db_conn, task)
-        printy("Task updated successfully!", "n>B")
+        rowcount = update_task(db_conn, task)
+
+        if rowcount > 0:
+            printy("Task updated successfully!", "nB")
+        else:
+            msg = f"Sorry, task with ID = {task_id} is not found"
+            printy(msg, "Br")
     except Exception as err:
         printy(f"Failed to update task: {err}", "Br")
     finally:
@@ -80,11 +104,17 @@ def handle_update_task(answer, db_conn):
 
 
 def handle_mark_done_a_task(answer, db_conn):
-    task_id = answer["task_id"]
-    rowcount = mark_done_task(db_conn, task_id)
-    if rowcount > 0:
-        printy("Task updated successfully!", "nB")
-    else:
-        msg = f"Task with ID = {task_id} is already DONE or it's not exist"
-        printy(msg, "Br")
-    print(input("\nPlease press enter to back\n"))
+    try:
+        task_id = answer["task_id"]
+        print(task_id)
+        rowcount = mark_done_task(db_conn, task_id)
+
+        if rowcount > 0:
+            printy("Task updated successfully!", "nB")
+        else:
+            msg = f"Sorry, task with ID = {task_id} is not found"
+            printy(msg, "Br")
+    except Exception as err:
+        printy(f"Failed to update the status of the task: {err}", "Br")
+    finally:
+        print(input("\nPlease press enter to back\n"))

@@ -73,7 +73,7 @@ def get_detail_task(conn, task_id):
         WHERE id = ?
     """
     cursor = conn.cursor()
-    cursor.execute(query, task_id)
+    cursor.execute(query, [task_id])
     return cursor
 
 
@@ -84,7 +84,7 @@ def mark_done_task(conn, task_id):
         WHERE id = ?
     """
     cursor = conn.cursor()
-    cursor.execute(query, task_id)
+    cursor.execute(query, [task_id])
     conn.commit()
     return cursor.rowcount
 
@@ -130,5 +130,19 @@ def update_task(conn, task):
             start_date = ?
         WHERE id = ?
     """
-    conn.execute(query, task.form_update_query_tuple())
+    cursor = conn.cursor()
+    cursor.execute(query, task.form_update_query_tuple())
     conn.commit()
+    return cursor.rowcount
+
+
+def do_a_task(conn, task_id):
+    query = """
+        UPDATE tasks
+        SET status = 'IN PROGRESS'
+        WHERE id = ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, [task_id])
+    conn.commit()
+    return cursor.rowcount

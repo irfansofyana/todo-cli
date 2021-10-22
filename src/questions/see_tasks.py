@@ -5,7 +5,13 @@ see_tasks_questions = [
         "type": "list",
         "name": "main",
         "message": "What do you want to do?",
-        "choices": ["See detail a task", "Update a task", "Mark done a task", "Back"],
+        "choices": [
+            "See detail a task",
+            "Do a task",
+            "Update a task",
+            "Mark done a task",
+            "Back",
+        ],
     }
 ]
 
@@ -46,6 +52,10 @@ update_a_task_questions = [
 ]
 
 mark_done_a_task_questions = [
+    {"type": "input", "name": "task_id", "message": "What's the task ID?"}
+]
+
+do_a_task_questions = [
     {"type": "input", "name": "task_id", "message": "What's the task ID?"}
 ]
 
