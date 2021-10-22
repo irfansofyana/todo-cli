@@ -1,0 +1,6 @@
+prettytable==2.2.1
+printy==2.2.0
+pyfiglet==0.8.post1
+PyInquirer==1.0.3
+python-dotenv==0.19.1
+tweepy==4.1.0
