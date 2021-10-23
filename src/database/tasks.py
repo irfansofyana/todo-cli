@@ -1,3 +1,5 @@
+from utils.database import dict_factory
+
 class Task:
     def __init__(
         self,
@@ -72,9 +74,10 @@ def get_detail_task(conn, task_id):
         FROM tasks
         WHERE id = ?
     """
+    conn.row_factory = dict_factory
     cursor = conn.cursor()
     cursor.execute(query, [task_id])
-    return cursor
+    return cursor.fetchall()
 
 
 def mark_done_task(conn, task_id):
@@ -91,16 +94,17 @@ def mark_done_task(conn, task_id):
 
 def get_top_five_tasks(conn):
     query = """
-        SELECT id, name, description, start_date, status
+        SELECT id, name, start_date, status
         FROM tasks
         WHERE status != 'DONE'
         AND start_date <= DATE('now', 'localtime')
         ORDER BY start_date ASC, urgency DESC, importance DESC
         LIMIT 5
     """
+    conn.row_factory = dict_factory
     cursor = conn.cursor()
     cursor.execute(query)
-    return cursor
+    return cursor.fetchall()
 
 
 def insert_task(conn, task):

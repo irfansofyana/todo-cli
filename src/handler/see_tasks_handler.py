@@ -9,6 +9,7 @@ from examples import custom_style_3
 from questions.see_tasks import *
 from database.tasks import *
 from utils.interface import *
+from utils.tables import create_pretty_tables
 
 
 def show_top_five_tasks(db_conn):
@@ -17,10 +18,10 @@ def show_top_five_tasks(db_conn):
         clear_screen()
         printy(text, "Br")
 
-        tasks_cursor = get_top_five_tasks(db_conn)
-        tasks_table = from_db_cursor(tasks_cursor)
+        tasks = get_top_five_tasks(db_conn)
 
-        if len(list(tasks_table)) > 0:
+        if len(tasks) > 0:
+            tasks_table = create_pretty_tables(tasks)
             printy(tasks_table, "B")
             printy("Keep up the high spirit, you can do it!", "oB")
         else:
@@ -52,9 +53,10 @@ def handle_see_tasks(answer, db_conn):
 def handle_detail_task(answer, db_conn):
     try:
         task_id = answer["task_id"]
-        task_cursor = get_detail_task(db_conn, task_id)
-        task_table = from_db_cursor(task_cursor)
-        if len(list(task_table)) > 0:
+        task = get_detail_task(db_conn, task_id)
+
+        if len(task) > 0:
+            task_table = create_pretty_tables(task)
             printy(task_table, "B")
         else:
             msg = f"Sorry, task with ID = {task_id} is not found"
@@ -100,7 +102,7 @@ def handle_update_task(answer, db_conn):
     except Exception as err:
         printy(f"Failed to update task: {err}", "Br")
     finally:
-        print(input("Please press enter to back\n"))
+        print(input("\nPlease press enter to back\n"))
 
 
 def handle_mark_done_a_task(answer, db_conn):
