@@ -29,5 +29,7 @@ with the terminal.
 - Update detail of a certain task.
 
 ## Demo Video
-https://user-images.githubusercontent.com/33191443/138533682-5a141f4b-de68-4ae5-a742-0495b6e8047c.mp4
+
+https://user-images.githubusercontent.com/33191443/138546860-0f56dafd-bb9e-4626-bd9b-1a2b25745096.mp4
+
 
