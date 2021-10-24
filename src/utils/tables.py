@@ -16,7 +16,7 @@ def format_text(text, max_line_length=20):
     return formatted_text
 
 def create_pretty_tables(tables):
-    items_table = prettytable.PrettyTable(hrules=ALL)
+    items_table = prettytable.PrettyTable(hrules=ALL, padding_width=3)
     header_columns = [key for key in tables[0]]
     items_table.field_names = header_columns
     for row in tables:
