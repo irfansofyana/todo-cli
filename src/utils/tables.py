@@ -1,5 +1,6 @@
 import prettytable
 from prettytable import ALL as ALL
+from prettytable import DOUBLE_BORDER
 
 def format_text(text, max_line_length=20):
     ACC_length = 0
@@ -22,4 +23,5 @@ def create_pretty_tables(tables):
         for key in row:
             row[key] = format_text(str(row[key]), max_line_length=15)
         items_table.add_row([row[key] for key in row])
+    items_table.set_style(DOUBLE_BORDER)
     return items_table
