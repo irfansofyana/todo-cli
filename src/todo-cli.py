@@ -53,7 +53,7 @@ def print_app_header():
 
 
 def init_db():
-    db_path = "database.db"
+    db_path = os.path.join(sys.path[0], "database.db")
     db_conn, err = get_connection(db_path)
 
     if err is not None:
