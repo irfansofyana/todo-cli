@@ -15,4 +15,4 @@ fi
 
 # Build the application into binary file
 cd src
-pyinstaller --add-data "database.db:." --add-data "../pyfiglet:./pyfiglet" todo-cli.py --onefile
+pyinstaller --add-data "./database.db:." --add-data "../pyfiglet:./pyfiglet" todo-cli.py --onedir

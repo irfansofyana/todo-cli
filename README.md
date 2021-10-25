@@ -14,7 +14,7 @@ with the terminal.
 - Add the full path of `./src/dist` to your `$PATH`. For example you can change `$PATH` in your `.zshrc` file (if you use `zsh` terminal) and add the following lines
     ```sh
     # TODO CLI
-    export TODO_CLI=your-path/todo-cli/src/dist # NOTE: Change `your-path` with yours
+    export TODO_CLI=your-path/todo-cli/src/dist/todo-cli # NOTE: Change `your-path` with yours
     export PATH=$PATH:$TODO_CLI
     ```
 - Start using the `TODO-CLI` in your terminal by typing `todo-cli`. Have fun and stay productive!

@@ -54,7 +54,8 @@ def print_app_header():
 
 
 def init_db():
-    db_path = Path(__file__).with_name("database.db")
+    path = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(path, 'database.db')
     db_conn, err = get_connection(db_path)
 
     if err is not None:
