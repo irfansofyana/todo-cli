@@ -1,5 +1,6 @@
 from __future__ import print_function, unicode_literals
 from PyInquirer import prompt
+from pathlib import Path
 
 from questions.main_menu import *
 from questions.add_task import *
@@ -53,7 +54,7 @@ def print_app_header():
 
 
 def init_db():
-    db_path = os.path.join(sys.path[0], "database.db")
+    db_path = Path(__file__).with_name("database.db")
     db_conn, err = get_connection(db_path)
 
     if err is not None:
