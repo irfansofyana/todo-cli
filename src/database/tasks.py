@@ -156,6 +156,7 @@ def get_uncompleted_tasks(conn):
         SELECT id, name, start_date, status, tags
         FROM tasks
         WHERE status != 'DONE'
+        ORDER BY start_date ASC, urgency DESC, importance DESC
     """
     conn.row_factory = dict_factory
     cursor = conn.cursor()
