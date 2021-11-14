@@ -150,3 +150,14 @@ def do_a_task(conn, task_id):
     cursor.execute(query, [task_id])
     conn.commit()
     return cursor.rowcount
+
+def get_uncompleted_tasks(conn):
+    query = """
+        SELECT id, name, start_date, status, tags
+        FROM tasks
+        WHERE status != 'DONE'
+    """
+    conn.row_factory = dict_factory
+    cursor = conn.cursor()
+    cursor.execute(query)
+    return cursor.fetchall()
