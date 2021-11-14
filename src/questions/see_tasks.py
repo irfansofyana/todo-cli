@@ -6,6 +6,7 @@ see_tasks_questions = [
         "name": "main",
         "message": "What do you want to do?",
         "choices": [
+            "See uncompleted tasks",
             "See detail a task",
             "Do a task",
             "Update a task",

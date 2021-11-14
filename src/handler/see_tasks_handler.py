@@ -34,7 +34,9 @@ def show_top_five_tasks(db_conn):
 
 def handle_see_tasks(answer, db_conn):
     command = answer["main"].lower()
-    if command == "see detail a task":
+    if command == "see uncompleted tasks":
+        handle_see_uncompleted_tasks(db_conn)
+    elif command == "see detail a task":
         ans = prompt(see_detail_a_task_questions, style=custom_style_3)
         handle_detail_task(ans, db_conn)
     elif command == "do a task":
@@ -49,6 +51,20 @@ def handle_see_tasks(answer, db_conn):
     elif command == "back":
         time.sleep(0)
 
+def handle_see_uncompleted_tasks(db_conn):
+    try:
+        tasks = get_uncompleted_tasks(db_conn)
+
+        if len(tasks) > 0:
+            tasks_table = create_pretty_tables(tasks)
+            printy(tasks_table, "B")
+        else:
+            msg = f"Good job! all tasks are completed."
+            printy(msg, "Br")
+    except Exception as err:
+        printy(f"Failed to show all uncompleted tasks: {err}", "Br")
+    finally:
+        print(input("\nPlease press enter to back\n"))
 
 def handle_detail_task(answer, db_conn):
     try:
