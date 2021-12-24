@@ -27,9 +27,4 @@ with the terminal.
 - Do the task, i.e. change the `status` of the task become `IN PROGRESS`.
 - Mark a task as done i.e. change the `status` of the task become `DONE`.
 - Update detail of a certain task.
-
-## Demo Video
-
-https://user-images.githubusercontent.com/33191443/138546860-0f56dafd-bb9e-4626-bd9b-1a2b25745096.mp4
-
-
+- Delete a certain task
