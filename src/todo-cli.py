@@ -5,9 +5,9 @@ from pathlib import Path
 from questions.main_menu import *
 from questions.add_task import *
 from questions.see_tasks import *
+from questions.delete_task import *
 
-from handler.see_tasks_handler import *
-from handler.add_task_handler import *
+from handler.tasks import *
 
 from database.connection import get_connection
 from database.queries import *
@@ -24,11 +24,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def see_tasks(db_conn):
-    show_top_five_tasks(db_conn)
+def see_uncompleted_tasks(db_conn):
+    handle_see_uncompleted_tasks(db_conn)
 
-    ans = prompt(see_tasks_questions, style=custom_style_3)
-    handle_see_tasks(ans, db_conn)
+
+def see_detail_task(db_conn):
+    ans = prompt(see_detail_a_task_questions, style=custom_style_3)
+    handle_detail_task(ans, db_conn)
 
 
 def add_task(db_conn):
@@ -38,13 +40,42 @@ def add_task(db_conn):
     handle_add_task(db_conn, ans)
 
 
+def do_task(db_conn):
+    ans = prompt(do_a_task_questions, style=custom_style_3)
+    handle_do_a_task(ans, db_conn)
+
+
+def finish_task(db_conn):
+    ans = prompt(mark_done_a_task_questions, style=custom_style_3)
+    handle_mark_done_a_task(ans, db_conn)
+
+
+def update_task(db_conn):
+    ans = prompt(update_a_task_questions, style=custom_style_3)
+    handle_update_task(ans, db_conn)
+
+def delete_task(db_conn):
+    ans = prompt(delete_a_task_question, style=custom_style_3)
+    handle_delete_a_task(ans, db_conn)
+
+
 def handle_command(comm, db_conn):
     if comm == "exit":
         sys.exit()
-    elif comm == "see tasks":
-        see_tasks(db_conn)
+    elif comm == "see detail task":
+        see_detail_task(db_conn)
+    elif comm == "see all uncompleted tasks":
+        see_uncompleted_tasks(db_conn)
     elif comm == "add task":
         add_task(db_conn)
+    elif comm == "do task":
+        do_task(db_conn)
+    elif comm == "finish task":
+        finish_task(db_conn)
+    elif comm == "update task":
+        update_task(db_conn)
+    elif comm == "delete task":
+        delete_task(db_conn)
 
 
 def print_app_header():
@@ -79,7 +110,9 @@ if __name__ == "__main__":
 
     while 1:
         print_app_header()
-
+        
+        show_top_five_tasks(db_conn)
+        
         answer = prompt(main_menu_questions, style=custom_style_3)
         command = answer["main"].lower()
         handle_command(command, db_conn)
