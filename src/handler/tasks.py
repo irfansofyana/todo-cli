@@ -135,3 +135,14 @@ def handle_mark_done_a_task(answer, db_conn):
         printy(f"Failed to update the status of the task: {err}", "Br")
     finally:
         print(input("\nPlease press enter to back\n"))
+
+
+def handle_delete_a_task(answer, db_conn):
+    try:
+        task_id = answer["task_id"]
+        delete_task(db_conn, task_id)
+        printy("Task deleted successfully!", "nB")
+    except Exception as err:
+        printy(f"Failed to update the status of the task: {err}", "Br")
+    finally:
+        print(input("\nPlease press enter to back\n"))

@@ -5,6 +5,7 @@ from pathlib import Path
 from questions.main_menu import *
 from questions.add_task import *
 from questions.see_tasks import *
+from questions.delete_task import *
 
 from handler.tasks import *
 
@@ -53,6 +54,10 @@ def update_task(db_conn):
     ans = prompt(update_a_task_questions, style=custom_style_3)
     handle_update_task(ans, db_conn)
 
+def delete_task(db_conn):
+    ans = prompt(delete_a_task_question, style=custom_style_3)
+    handle_delete_a_task(ans, db_conn)
+
 
 def handle_command(comm, db_conn):
     if comm == "exit":
@@ -70,7 +75,7 @@ def handle_command(comm, db_conn):
     elif comm == "update task":
         update_task(db_conn)
     elif comm == "delete task":
-        pass
+        delete_task(db_conn)
 
 
 def print_app_header():

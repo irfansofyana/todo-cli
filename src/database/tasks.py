@@ -162,3 +162,13 @@ def get_uncompleted_tasks(conn):
     cursor = conn.cursor()
     cursor.execute(query)
     return cursor.fetchall()
+
+
+def delete_task(conn, task_id):
+    query = """
+        DELETE FROM tasks
+        WHERE id = ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, [task_id])
+    conn.commit()
