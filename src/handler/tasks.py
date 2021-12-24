@@ -100,6 +100,7 @@ def handle_do_a_task(answer, db_conn):
 
 def handle_update_task(answer, db_conn):
     try:
+        task_id = answer["task_id"]
         task = Task(
             name=answer["task_name"],
             description=answer["task_description"],
