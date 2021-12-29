@@ -5,3 +5,4 @@ database.db
 build
 dist
 todo-cli.spec
+tags
